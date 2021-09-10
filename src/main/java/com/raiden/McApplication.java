@@ -8,6 +8,7 @@ public class McApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(McApplication.class, args);
+		
 	}
-
+;
 }

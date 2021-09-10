@@ -7,20 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.raiden.domain.Categoria;
+import com.raiden.domain.Categorias;
 
 
 @RestController
-@RequestMapping(value="/categorias")
+@RequestMapping(value="/Categorias")
 public class CategoriaResource {
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Categoria> listar() {
+	public List<Categorias> listar() {
 		
-		Categoria cat1 = new Categoria(1, "Informatica");
-		Categoria cat2 = new Categoria(2, "Escritorio");
+		Categorias cat1 = new Categorias(1, "Informatica");
+		Categorias cat2 = new Categorias(2, "Escritorio");
 		
-		List<Categoria> lista = new ArrayList<>();
+		List<Categorias> lista = new ArrayList<>();
 		lista.add(cat1);
 		lista.add(cat2);
 		
