@@ -1,30 +1,29 @@
 package com.raiden.resources;
 
-import java.util.ArrayList;
-import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.raiden.domain.Categorias;
+import com.raiden.services.CategoriasService;
 
 
 @RestController
 @RequestMapping(value="/Categorias")
 public class CategoriaResource {
+
+	@Autowired
+	private CategoriasService service;
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public List<Categorias> listar() {
+	@RequestMapping(value="/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> find(@PathVariable Integer id) {
+		Categorias obj = service.buscar(id);
+		return ResponseEntity.ok().body(obj);
 		
-		Categorias cat1 = new Categorias(1, "Informatica");
-		Categorias cat2 = new Categorias(2, "Escritorio");
-		
-		List<Categorias> lista = new ArrayList<>();
-		lista.add(cat1);
-		lista.add(cat2);
-		
-		return lista;
 	}
 
 }
