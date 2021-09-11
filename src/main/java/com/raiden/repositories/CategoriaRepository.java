@@ -8,5 +8,4 @@ import com.raiden.domain.Categorias;
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categorias, Integer> {
 
-	Categorias findOne(Integer id);
 }
