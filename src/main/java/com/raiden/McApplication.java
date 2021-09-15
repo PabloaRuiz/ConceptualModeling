@@ -7,10 +7,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.raiden.domain.Categorias;
 import com.raiden.domain.Cidade;
+import com.raiden.domain.Cliente;
+import com.raiden.domain.Endereco;
 import com.raiden.domain.Estado;
 import com.raiden.domain.Produtos;
+import com.raiden.domain.enums.TipoCliente;
 import com.raiden.repositories.CategoriaRepository;
 import com.raiden.repositories.CidadeRepository;
+import com.raiden.repositories.ClienteRepository;
+import com.raiden.repositories.EnderecoRepository;
 import com.raiden.repositories.EstadoRepository;
 import com.raiden.repositories.ProdutosRepository;
 
@@ -28,6 +33,12 @@ public class McApplication implements CommandLineRunner {
 	private CidadeRepository cidadeRepository;
 	@Autowired
 	private EstadoRepository estadoRepository;
+	@Autowired
+	private ClienteRepository clienteRepository;
+	@Autowired
+	private EnderecoRepository enderecoRepository;
+	
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(McApplication.class, args);
@@ -69,6 +80,17 @@ public class McApplication implements CommandLineRunner {
 		 produtosRepository.saveAll(Arrays.asList(p1, p2, p3, p4)); 
 		 estadoRepository.saveAll(Arrays.asList(est1, est2));
 		 cidadeRepository.saveAll(Arrays.asList(ct1,ct1,ct3,ct4));
+		 
+		 
+		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "40860288892", TipoCliente.PESSOAFISICA);
+		cli1.getTelefones().addAll(Arrays.asList("1999582125", "01935835445"));
+		
+		Endereco e1 = new Endereco(null, "Rua flores", "2450", "S/C", "Jardim das flores", "13690554", cli1, ct4); 
+		
+		cli1.getEndereco().addAll(Arrays.asList(e1));
+		
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(e1));
 		 
 	}
 }
