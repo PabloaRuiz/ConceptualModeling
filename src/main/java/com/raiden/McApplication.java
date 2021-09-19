@@ -10,16 +10,22 @@ import com.raiden.domain.Cidade;
 import com.raiden.domain.Cliente;
 import com.raiden.domain.Endereco;
 import com.raiden.domain.Estado;
+import com.raiden.domain.PagamentoComCartao;
+import com.raiden.domain.Pagamentos;
+import com.raiden.domain.Pedidos;
 import com.raiden.domain.Produtos;
+import com.raiden.domain.enums.EstadoPagamento;
 import com.raiden.domain.enums.TipoCliente;
 import com.raiden.repositories.CategoriaRepository;
 import com.raiden.repositories.CidadeRepository;
 import com.raiden.repositories.ClienteRepository;
 import com.raiden.repositories.EnderecoRepository;
 import com.raiden.repositories.EstadoRepository;
+import com.raiden.repositories.PagamentoRepository;
+import com.raiden.repositories.PedidoRepository;
 import com.raiden.repositories.ProdutosRepository;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 @SpringBootApplication
@@ -37,7 +43,10 @@ public class McApplication implements CommandLineRunner {
 	private ClienteRepository clienteRepository;
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-	
+	@Autowired
+	private PedidoRepository pedidoRepository;
+	@Autowired
+	private PagamentoRepository pagamentoRepository;
 	
 	
 	public static void main(String[] args) {
@@ -91,6 +100,18 @@ public class McApplication implements CommandLineRunner {
 		
 		clienteRepository.saveAll(Arrays.asList(cli1));
 		enderecoRepository.saveAll(Arrays.asList(e1));
-		 
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		
+		Pedidos ped1 = new Pedidos(null, sdf.parse("30/09/2017 10:32"), cli1, e1); 
+		Pagamentos pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+		ped1.setPagamentos(pagto1);
+		
+		
+		cli1.getPedidos().addAll(Arrays.asList(ped1));
+		
+		
+		pedidoRepository.saveAll(Arrays.asList(ped1));
+		pagamentoRepository.saveAll(Arrays.asList(pagto1));
 	}
 }
