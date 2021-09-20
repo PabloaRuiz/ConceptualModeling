@@ -10,6 +10,7 @@ import com.raiden.domain.Cidade;
 import com.raiden.domain.Cliente;
 import com.raiden.domain.Endereco;
 import com.raiden.domain.Estado;
+import com.raiden.domain.ItemPedido;
 import com.raiden.domain.PagamentoComCartao;
 import com.raiden.domain.Pagamentos;
 import com.raiden.domain.Pedidos;
@@ -21,6 +22,7 @@ import com.raiden.repositories.CidadeRepository;
 import com.raiden.repositories.ClienteRepository;
 import com.raiden.repositories.EnderecoRepository;
 import com.raiden.repositories.EstadoRepository;
+import com.raiden.repositories.ItemPedidoRepository;
 import com.raiden.repositories.PagamentoRepository;
 import com.raiden.repositories.PedidoRepository;
 import com.raiden.repositories.ProdutosRepository;
@@ -47,6 +49,8 @@ public class McApplication implements CommandLineRunner {
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	
 	public static void main(String[] args) {
@@ -113,5 +117,13 @@ public class McApplication implements CommandLineRunner {
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1));
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 200.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1));
 	}
 }
