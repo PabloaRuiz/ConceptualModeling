@@ -8,4 +8,6 @@ em linguagem orientada a objetos.
 
 
 ### Ajustes e melhorias:warning:
-Status do Projeto: Em desenvolvimento para as próximas atualizações [:spiral_calendar:](https://github.com/PabloaRuiz/ConceptualModeling/projects/1)
+Status do Projeto: Finalizado
+
+Informações sobre o Projeto [:spiral_calendar:](https://github.com/PabloaRuiz/ConceptualModeling/projects/1)
